@@ -50,3 +50,4 @@ Mirror large.jpg horizontally and return 800px wide JPEG
 * http://127.0.0.1:8080/iiif/large.jpg/full/800,/!0/default.jpg 
 
 For more information, read the specification at http://iiif.io/technical-details.html
+
