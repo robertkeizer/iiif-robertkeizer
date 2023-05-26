@@ -3,7 +3,7 @@
 import os
 import time
 from flask import Flask, send_file, jsonify, abort, request, render_template, redirect
-from flask_cors import CORS
+from flask.ext.cors import CORS
 from iiif2 import iiif, web
 from .resolver import ia_resolver, create_manifest, create_manifest3, getids, collection, \
     purify_domain, cantaloupe_resolver
@@ -34,9 +34,9 @@ def sprite_concat(imgs):
 @app.route('/iiif/')
 def index():
     """Lists all available book and image items on Archive.org"""
-    cursor = request.args.get('cursor', '')
+    page = request.args.get('page', 1)
     q = request.args.get('q', '')
-    return jsonify(getids(q, cursor=cursor))
+    return jsonify(getids(q, page=page))
 
 @app.route('/iiif/url2iiif')
 def url2iiif():
@@ -54,10 +54,13 @@ def url2iiif():
 
 @app.route('/iiif/collection.json')
 def catalog():
-    cursor = request.args.get('cursor', '')
     q = request.args.get('q', '')
+    page = request.args.get('page', 1)
+    limit = request.args.get('limit', 100)
     domain = purify_domain(request.args.get('domain', request.url_root))
-    return ldjsonify(collection(domain, getids(q, limit, cursor)['ids']))
+    docs = getids(q, page=page, limit=limit).get('response', {}).get('docs', [])
+    ids = (doc['identifier'] for doc in docs)
+    return ldjsonify(collection(domain, ids))
 
 @app.route('/iiif/cache')
 def cache():

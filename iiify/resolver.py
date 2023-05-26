@@ -20,22 +20,20 @@ valid_filetypes = ['jpg', 'jpeg', 'png', 'gif', 'tif', 'jp2', 'pdf']
 def purify_domain(domain):
     return domain if domain.endswith('/iiif/') else domain + 'iiif/'
 
-def getids(q, limit=1000, cursor=''):
-    r = requests.get('%s/iiif' % apiurl, params={
-        'q': q,
-        'limit': limit,
-        'cursor': cursor
-    }, allow_redirects=True, timeout=None)
-    return r.json()
-
-def to_mimetype(format):
-    formats = {
-        "VBR MP3": "audio/mp3",
-        "Flac": "audio/flac",
-        "Ogg Vorbis": "audio/ogg",
-        "WAVE": "audio/wav"
+def getids(query, page=1, limit=100, security=True, sort='', fields='identifier,title'):
+    limit = min(limit, 1000)
+    params = {
+        'q': query,
+        'rows': limit,
+        'sort': sort,
+        'page': page,
+        'fl[]': fields,
+        'output': 'json',
     }
-    return formats.get(format, "application/octet-stream")
+    return requests.get(
+        "%s/advancedsearch.php" % ARCHIVE, params=params,
+        allow_redirects=True, timeout=None
+    ).json()
 
 def collection(domain, identifiers, label='Custom Archive.org IIIF Collection'):
     cs = {
