@@ -11,6 +11,6 @@ jobs:
       # https://github.com/internetarchive/cicd
       - uses: internetarchive/cicd@v1
         with:
-          BASE_DOMAIN: 'bloghost0.fnf.archive.org'
+          BASE_DOMAIN: 'ux-fnf-misc.archive.org'
           NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
