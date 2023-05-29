@@ -14,6 +14,7 @@ jobs:
           #BASE_DOMAIN: 'ux-fnf-misc.archive.org'
           NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOMAD_VAR_CHECK_PATH: '/iiif/documentation'
           #NOMAD_VAR_CHECK_PROTOCOL: 'tcp'
           NOMAD_ADDR: 'https://ux-fnf-misc.archive.org/'
           #NOMAD_VAR_COUNT_CANARIES: 0
