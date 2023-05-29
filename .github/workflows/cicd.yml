@@ -15,9 +15,9 @@ jobs:
           NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOMAD_VAR_CHECK_PATH: '/iiif/documentation'
-          NOMAD_VAR_CHECK_PROTOCOL: 'http'
+          #NOMAD_VAR_CHECK_PROTOCOL: 'http'
           NOMAD_ADDR: 'https://ux-fnf-misc.archive.org/'
           #NOMAD_VAR_COUNT_CANARIES: 0
-          NOMAD_VAR_CHECK_TIMEOUT: '10m'
-          NOMAD_VAR_HOSTNAMES: '["barf.ux-fnf-misc.archive.org","iiif.ux-fnf-misc.archive.org"]'
+          #NOMAD_VAR_CHECK_TIMEOUT: '10m'
+          #NOMAD_VAR_HOSTNAMES: '["iiif.ux-fnf-misc.archive.org"]'
 
